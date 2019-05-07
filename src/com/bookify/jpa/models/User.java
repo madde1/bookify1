@@ -19,7 +19,7 @@ public class User {
 
     @Column(name = "usersName")
     private String userName;
-
+//hej
     @Column(name = "usersEmail")
     private String userEmail;
 
