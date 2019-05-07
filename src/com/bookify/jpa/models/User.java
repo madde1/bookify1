@@ -11,7 +11,7 @@ import javax.persistence.*;
 @JsonPropertyOrder({"userId","userName","userEmail","userPassword"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="userId")
 public class User {
-
+//hej
     @Id
     @GeneratedValue
     @Column(name = "usersId")
