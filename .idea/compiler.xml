@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bookify1_jpa_maven" />
+        <module name="bookify_jpa_maven" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="bookify1_jpa_maven" target="1.5" />
+      <module name="bookify_jpa_maven" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

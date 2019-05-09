@@ -6,6 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="BookifyPU" value="da6f64a4-b194-4c42-9db5-6be6c0fec210" />
           <factory-entry name="NewPersistenceUnit" value="da6f64a4-b194-4c42-9db5-6be6c0fec210" />
         </datasource-mapping>
         <naming-strategy-map />

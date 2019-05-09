@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bookify1.iml" filepath="$PROJECT_DIR$/bookify1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bookify_jpa_maven/bookify1_jpa_maven.iml" filepath="$PROJECT_DIR$/bookify_jpa_maven/bookify1_jpa_maven.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bookify_jpa_maven/bookify_jpa_maven.iml" filepath="$PROJECT_DIR$/bookify_jpa_maven/bookify_jpa_maven.iml" />
     </modules>
   </component>
 </project>
