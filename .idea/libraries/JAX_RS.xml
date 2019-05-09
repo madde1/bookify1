@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="JAX-RS" type="JAX-RS">
-    <CLASSES>
-      <root url="jar://C:/Program Files/Java/wildfly-16.0.0.Final/modules/system/layers/base/javax/ws/rs/api/main/jboss-jaxrs-api_2.1_spec-1.0.2.Final.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

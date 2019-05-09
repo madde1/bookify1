@@ -3,8 +3,10 @@
 
     <persistence-unit name="BookifyPU">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>java:/MySqBookifyDS</jta-data-source>
+        <jta-data-source>java:/MySqlBookifyDS</jta-data-source>
         <class>com.bookify.jpa.models.User</class>
+        <class>com.bookify.jpa.models.Book</class>
+        <class>com.bookify.jpa.models.Review</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.archive.autodetection" value="class"/>
