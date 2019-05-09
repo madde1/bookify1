@@ -6,37 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fb26af2-9b48-4ff7-841f-77d998975cfc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bookify_maven/bookify_maven.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookify_maven/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/bookify1_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/bookify1_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/da6f64a4-b194-4c42-9db5-6be6c0fec210.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Hibernate_5_4_2_5_4_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/JAX_RS.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/JBoss_Weld_2_0_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/JPA_2_0_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookify1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bookify1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookify_jpa_maven/bookify1_jpa_maven.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookify_jpa_maven/bookify_jpa_maven.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookify_jpa_maven/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/WEB-INF/beans.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/WEB-INF/classes/META-INF/beans.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/WEB-INF/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/WEB-INF/classes/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/WEB-INF/classes/com/bookify/jpa/api/BookifyApi.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/WEB-INF/classes/com/bookify/jpa/models/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/WEB-INF/classes/com/bookify/jpa/repositrories/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/bookify1_war_exploded.war/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/bookify1/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/bookify1/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bookify/jpa/models/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bookify/jpa/models/Book.java" afterDir="false" />
-    </list>
+    <list default="true" id="4fb26af2-9b48-4ff7-841f-77d998975cfc" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/bookify_maven/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -105,7 +75,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bookify/jpa/api/BookifyApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
+            <state relative-caret-position="162">
               <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -167,35 +137,6 @@
               <item name="bookify1" type="b2602c69:ProjectViewProjectNode" />
               <item name="bookify1" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="bookify1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookify1" type="462c0819:PsiDirectoryNode" />
-              <item name="bookify_maven" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bookify1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookify1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bookify1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookify1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="jpa" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bookify1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookify1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="jpa" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bookify1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookify1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -209,6 +150,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -317,24 +261,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557400350640</updated>
-      <workItem from="1557400352181" duration="1589000" />
+      <workItem from="1557400352181" duration="2077000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1589000" />
+    <option name="totallyTimeSpent" value="2077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info id="Persistence" sideWeight="0.5595238" side_tool="true" visible="true" weight="0.1854251" />
+      <window_info id="Persistence" sideWeight="0.31332082" side_tool="true" visible="true" weight="0.1854251" />
       <window_info id="Designer" />
       <window_info id="Image Layers" />
       <window_info id="UI Designer" />
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Capture Tool" />
       <window_info id="Web" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.44047618" visible="true" weight="0.1854251" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6866792" visible="true" weight="0.1854251" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Application Servers" weight="0.3285968" />
       <window_info anchor="bottom" id="Terminal" />
@@ -346,7 +290,7 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.7015986" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.053285968" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -408,7 +352,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bookify/jpa/api/BookifyApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
+        <state relative-caret-position="162">
           <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
