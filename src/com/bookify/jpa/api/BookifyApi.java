@@ -1,7 +1,9 @@
 package com.bookify.jpa.api;
 
+import com.bookify.jpa.models.Book;
 import com.bookify.jpa.models.User;
 import com.bookify.jpa.repositrories.UserRepository;
+import com.bookify.jpa.repositrories.bookRepository;
 
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
@@ -26,4 +28,14 @@ public class BookifyApi extends Application{
         return ur.getAllUsers();
     }
 
+    @Inject
+    private bookRepository br;
+
+    @GET
+    @Path("/book")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Book> getBookTitel(){
+        return br.getAllBooks();
+    }
 }
+
