@@ -10,7 +10,6 @@
           <element id="library" level="project" name="lib" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="bookify1/web/Web2" />
       <element id="javaee-facet-resources" facet="bookify1/web/Web" />
     </root>
   </artifact>

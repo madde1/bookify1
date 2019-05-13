@@ -58,5 +58,24 @@ bookId int not null auto_increment,
 bookTitel varchar(50),
 bookAuthor varchar(50),
 bookDate date,
-primary key(bookId),
+primary key(bookId)
 );
+
+create table likes ( 
+  likesId int not null auto_increment,
+  likesBId int not null,
+  likesUId int not null,
+  primary key (likesId),
+  foreign key (likesBId) references book (bookId),
+  foreign key (likesUId) references users (usersId)
+);
+
+create table friends (
+friendsId int not null auto_increment,
+friendsUId1 int not null,
+friendsUId2 int not null,
+primary key (friendsId),
+foreign key (friendsUId1)  references users (usersId),
+foreign key (friendsUId2) references users (usersId)
+);
+
