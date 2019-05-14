@@ -141,3 +141,14 @@ fabric.properties
 # End of https://www.gitignore.io/api/sass,webstorm,phpstorm
 .idea/workspace.xml
 *.xml
+bookify1.iml
+.idea/workspace.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_8.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_8.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_8.xml
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/compiler.xml
+.idea/artifacts/bookify1_war_exploded.xml

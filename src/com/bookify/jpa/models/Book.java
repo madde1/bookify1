@@ -15,6 +15,12 @@ import java.util.Date;
 
 public class Book {
 
+    public Book(String bookTitel, String bookAuthor, Date bookDate) {
+        this.bookTitel = bookTitel;
+        this.bookAuthor = bookAuthor;
+        this.bookDate = bookDate;
+    }
+    public Book(){}
     @Id
     @GeneratedValue
     @Column(name = "bookId")
