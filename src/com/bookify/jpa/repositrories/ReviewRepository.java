@@ -1,5 +1,6 @@
 package com.bookify.jpa.repositrories;
 
+import com.bookify.jpa.models.Review;
 import com.bookify.jpa.models.User;
 
 import javax.persistence.EntityManager;
@@ -15,5 +16,9 @@ public class ReviewRepository {
     public List<User> getAllReviews(){
         Query query = em.createQuery("SELECT r FROM Review r order by r.reviewDate");
         return query.getResultList();
+    }
+    public Review create(Review review){
+        em.persist(review);
+        return review;
     }
 }

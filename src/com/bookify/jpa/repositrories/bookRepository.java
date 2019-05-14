@@ -17,4 +17,8 @@ public class bookRepository {
         Query query = em.createQuery("SELECT book FROM Book book order by book.bookTitel");
         return query.getResultList();
     }
+    public Book create(Book book){
+        em.persist(book);
+        return book;
+    }
 }
