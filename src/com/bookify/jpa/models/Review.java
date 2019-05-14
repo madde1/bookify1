@@ -13,6 +13,14 @@ import java.util.Date;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="reviewId")
 public class Review {
 
+    public Review(Integer reviewUserId, Integer reviewbookId, String reviewText, Date reviewDate) {
+        this.reviewUserId = reviewUserId;
+        this.reviewbookId = reviewbookId;
+        this.reviewText = reviewText;
+        this.reviewDate = reviewDate;
+    }
+
+    public Review(){}
     @Id
     @GeneratedValue
     @Column(name = "reviewId")

@@ -16,4 +16,10 @@ public class UserRepository {
         Query query = em.createQuery("SELECT user FROM User user order by user.userName");
      return query.getResultList();
     }
+
+    public User create(User user){
+        em.persist(user);
+        return user;
+    }
+
 }
