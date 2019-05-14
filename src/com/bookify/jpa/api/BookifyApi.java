@@ -15,9 +15,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+
 @Path("/v1.0")
 @ApplicationPath("/api")
-public class BookifyApi extends Application{
+public class BookifyApi extends Application {
 
     @Inject
     private UserRepository ur;
