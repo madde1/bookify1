@@ -61,15 +61,6 @@ bookDate date,
 primary key(bookId)
 );
 
-create table likes ( 
-  likesId int not null auto_increment,
-  likesBId int not null,
-  likesUId int not null,
-  primary key (likesId),
-  foreign key (likesBId) references book (bookId),
-  foreign key (likesUId) references users (usersId)
-);
-
 create table friends (
 friendsId int not null auto_increment,
 friendsUId1 int not null,
