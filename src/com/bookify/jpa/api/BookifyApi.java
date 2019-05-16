@@ -30,6 +30,21 @@ public class BookifyApi extends Application {
         return ur.getAllUsers();
     }
 
+    //get user by id (for admin purposes)
+    @GET
+    @Path("/users/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public User getUserById(@PathParam("id") int id) { return ur.findById(id);
+    }
+
+    //get user by username
+    @GET
+    @Path("/users/{userName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public User getUserByUserName(@PathParam("userName") String userName) { return ur.findByUserName(userName);
+    }
+
+
     //Post metod för att lägga till användare.
     @POST
     @Path("/users")
@@ -61,6 +76,19 @@ public class BookifyApi extends Application {
         br.create(book);
         return Response.ok(book.getBookTitel() + " " + book.getBookAuthor() + " book added to the database").build();
     }
+
+    @GET
+    @Path ("/books/{bookTitle}")
+    @Produces (MediaType.APPLICATION_JSON)
+    public Book getBookByTitle(@PathParam("bookTitle") String bookTitle) { return br.findByBookTitle(bookTitle);
+    }
+
+    @GET
+    @Path ("/books/{bookAuthor}")
+    @Produces (MediaType.APPLICATION_JSON)
+    public Book getBookByAuthor(@PathParam("bookAuthor") String bookAuthor) { return br.findByBookAuthor(bookAuthor);
+    }
+
     /**Recensions delen av API:et med CRUD metoder*/
     @Inject
     private ReviewRepository rr;

@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+    <h1>Bookify</h1>
   </body>
 </html>
