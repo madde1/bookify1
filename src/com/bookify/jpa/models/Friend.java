@@ -14,20 +14,20 @@ public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "friendsId")
-    private int id;
+    private Integer id;
 
     @Column(name = "friendsUId1")
-    private int friend1Id;
+    private Integer friend1Id;
 
     @Column(name = "friendsUId2")
-    private int getFriend2Id;
+    private Integer friend2Id;
 
     public Friend() {
     }
 
-    public Friend(int friend1Id, int getFriend2Id) {
+    public Friend(Integer friend1Id, Integer friend2Id) {
         this.friend1Id = friend1Id;
-        this.getFriend2Id = getFriend2Id;
+        this.friend2Id = friend2Id;
     }
 
     public int getId() {
@@ -47,10 +47,10 @@ public class Friend {
     }
 
     public int getGetFriend2Id() {
-        return getFriend2Id;
+        return friend2Id;
     }
 
-    public void setGetFriend2Id(int getFriend2Id) {
-        this.getFriend2Id = getFriend2Id;
+    public void setGetFriend2Id(int friend2Id) {
+        this.friend2Id = friend2Id;
     }
 }
