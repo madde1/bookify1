@@ -35,6 +35,8 @@ public class Review {
     @Column(name = "reviewText")
     private String reviewText;
 
+    @JsonFormat
+            (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Column(name = "reviewDate")
     private Date reviewDate;
 
