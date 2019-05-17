@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -14,7 +15,7 @@ import java.util.Date;
 @JsonPropertyOrder({"bookId","bookTitel","bookAuthor","bookDate"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="bookId")
 
-public class Book {
+public class Book implements Serializable {
 
     public Book(String bookTitel, String bookAuthor, Date bookDate) {
         this.bookTitel = bookTitel;

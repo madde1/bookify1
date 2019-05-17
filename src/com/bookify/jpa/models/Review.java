@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "review")
 @JsonPropertyOrder({"reviewId","reviewUserId","reviewbookId","reviewText","reviewDate"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="reviewId")
-public class Review {
+public class Review implements Serializable {
 
     public Review(Integer reviewUserId, Integer reviewbookId, String reviewText, Date reviewDate) {
         this.reviewUserId = reviewUserId;

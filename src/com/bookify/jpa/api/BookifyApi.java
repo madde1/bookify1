@@ -27,6 +27,7 @@ public class BookifyApi extends Application {
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getUserName(){
+        List<User> u = ur.getAllUsers();
         return ur.getAllUsers();
     }
 

@@ -2,10 +2,12 @@ package com.bookify.jpa.repositrories;
 
 import com.bookify.jpa.models.User;
 
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
@@ -15,7 +17,13 @@ public class UserRepository {
 
     public List<User> getAllUsers(){
         Query query = em.createQuery("SELECT user FROM User user order by user.userName");
-     return query.getResultList();
+        // Empty friends
+        List<User> users = new ArrayList<>();
+        for(Object u : query.getResultList()){
+            ((User)u).removeFriends();
+            users.add(((User)u));
+        }
+     return users;
     }
 
     public User findById(int id) {

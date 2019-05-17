@@ -5,12 +5,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "friends")
 @JsonPropertyOrder({"friendsId", "friendsUId1", "friendsUId2"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="userId")
-public class Friend {
+public class Friend implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "friendsId")
