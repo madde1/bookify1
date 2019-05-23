@@ -61,11 +61,23 @@ bookDate date,
 primary key(bookId)
 );
 
-create table friends (
+#Old
+/*create table friends (
 friendsId int not null auto_increment,
 friendsUId1 int not null,
 friendsUId2 int not null,
 primary key (friendsId),
+foreign key (friendsUId1)  references users (usersId),
+foreign key (friendsUId2) references users (usersId)
+);*/
+
+DROP TABLE IF EXISTS friends;
+
+#New
+create table friends (
+friendsUId1 int not null,
+friendsUId2 int not null,
+primary key (friendsUId1, friendsUId2),
 foreign key (friendsUId1)  references users (usersId),
 foreign key (friendsUId2) references users (usersId)
 );

@@ -14,6 +14,7 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Set;
 
 
 @Path("/v1.0")
@@ -45,6 +46,13 @@ public class BookifyApi extends Application {
     public User getUserByUserName(@PathParam("userName") String userName) { return ur.findByUserName(userName);
     }
 
+    @GET
+    @Path("/users/{id}/friends")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFriendsByUserId(@PathParam("id") int id) {
+        User u = ur.findById(id);
+        return Response.ok(u.getFriends()).build();
+    }
 
     //Post metod för att lägga till användare.
     @POST
@@ -56,6 +64,38 @@ public class BookifyApi extends Application {
         ur.create(user);
         return Response.ok(user.getUserName() + " added as user").build();
 
+    }
+
+    @POST
+    @Path("/users/{id}/addfriend/{friendId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addFriend(@PathParam("id") int id, @PathParam("friendId") int friendId){
+        User user = ur.findById(id);
+        User friend = ur.findById(friendId);
+        if(user.isFriendWith(friend)) {
+            return Response.status(400).build();
+        } else {
+            user.addFriend(friend);
+            return Response.status(201).build();
+        }
+    }
+
+    @DELETE
+    @Path("/users/{id}/removefriend/{friendId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeFriend(@PathParam("id") int id, @PathParam("friendId") int friendId){
+        User user = ur.findById(id);
+        User friend = ur.findById(friendId);
+        if(user.isFriendWith(friend)) {
+            user.removeFriend(friend);
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
+        }
     }
 
     @Inject
