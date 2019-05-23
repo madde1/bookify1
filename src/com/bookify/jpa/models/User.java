@@ -1,9 +1,6 @@
 package com.bookify.jpa.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 
 import javax.enterprise.context.SessionScoped;
@@ -17,12 +14,13 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @JsonPropertyOrder({"userId","userName","userEmail","userPassword"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="userId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="userId")
+@JsonFormat()
 @SessionScoped
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "usersId")
     private  Integer userId;
 
@@ -47,13 +45,15 @@ public class User implements Serializable {
                 inverseJoinColumns = @JoinColumn(name = "havereadBookId"))
     private Set<Book> booksHaveRead = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "friends",
             joinColumns = @JoinColumn(name = "friendsUId1"),
             inverseJoinColumns = @JoinColumn(name = "friendsUId2"))
     private Set<User> friends = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "friends",
             joinColumns = @JoinColumn(name = "friendsUId2"),
             inverseJoinColumns = @JoinColumn(name = "friendsUId1"))
@@ -111,8 +111,33 @@ public class User implements Serializable {
         return friends;
     }
 
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
+    }
+
+    public Set<User> getFriendOf() {
+        return friendOf;
+    }
+
+    public void setFriendOf(Set<User> friendOf) {
+        this.friendOf = friendOf;
+    }
+
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
+
     public void removeFriends() {
         this.friends = new HashSet<>();
         this.friendOf = new HashSet<>();
+    }
+
+    public void removeFriend(User friend) {
+        friends.remove(friend);
+        friendOf.remove(friend);
+    }
+
+    public boolean isFriendWith(User user) {
+        return getFriends().contains(user);
     }
 }
