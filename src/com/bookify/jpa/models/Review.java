@@ -1,9 +1,6 @@
 package com.bookify.jpa.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +20,7 @@ public class Review implements Serializable {
     }
 
     public Review(){}
+
     @Id
     @GeneratedValue
     @Column(name = "reviewId")
@@ -37,8 +35,22 @@ public class Review implements Serializable {
     @Column(name = "reviewText")
     private String reviewText;
 
-    @JsonFormat
-            (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "reviewbookId", insertable=false, updatable=false)
+    private Book book;
+
+    @JsonIgnore
+    public Book getBooks() {
+        return book;
+    }
+
+    public void setBooks(Book books) {
+        this.book = books;
+    }
+
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Column(name = "reviewDate")
     private Date reviewDate;
 
@@ -65,6 +77,7 @@ public class Review implements Serializable {
     public void setReviewbookId(Integer reviewbookId) {
         this.reviewbookId = reviewbookId;
     }
+
 
     public String getReviewText() {
         return reviewText;

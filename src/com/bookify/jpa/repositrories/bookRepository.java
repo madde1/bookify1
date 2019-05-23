@@ -1,6 +1,7 @@
 package com.bookify.jpa.repositrories;
 
 import com.bookify.jpa.models.Book;
+import com.bookify.jpa.models.Review;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,4 +34,5 @@ public class bookRepository {
         em.persist(book);
         return book;
     }
+
 }

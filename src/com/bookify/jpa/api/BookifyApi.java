@@ -90,6 +90,8 @@ public class BookifyApi extends Application {
     public Book getBookByAuthor(@PathParam("bookAuthor") String bookAuthor) { return br.findByBookAuthor(bookAuthor);
     }
 
+
+
     /**Recensions delen av API:et med CRUD metoder*/
     @Inject
     private ReviewRepository rr;
@@ -110,5 +112,15 @@ public class BookifyApi extends Application {
     public List<Review> getReview(){
         return rr.getAllReviews();
     }
+
+    //Get review by bookTitle
+    @GET
+    @Path("/review/{bookTitle}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Review> getReviewForBook(@PathParam("bookTitle") String bookTitle) {return rr.viewReviewForBook(bookTitle);}
+
+
+
+
 }
 
