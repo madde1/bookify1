@@ -1,18 +1,15 @@
 package com.bookify.jpa.models;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "book")
-@JsonPropertyOrder({"bookId","bookTitel","bookAuthor","bookDate"})
+@JsonPropertyOrder({"bookId","bookTitel","bookAuthor","bookDate", "booksGenre"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="bookId")
 
 public class Book implements Serializable {
@@ -37,6 +34,15 @@ public class Book implements Serializable {
     @Column(name = "bookDate")
     @JsonFormat
             (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+
+    @ManyToMany( fetch = FetchType.EAGER)
+    @JsonIgnore
+    @JoinTable(name = "bookgen",
+            joinColumns = @JoinColumn(name = "bookGenBId"),
+            inverseJoinColumns = @JoinColumn(name = "bookGenGId"))
+    private List<Genre> booksGenre;
+
+
     private Date bookDate;
 
     public Integer getBookId() {
@@ -69,5 +75,9 @@ public class Book implements Serializable {
 
     public void setBookDate(Date bookDate) {
         this.bookDate = bookDate;
+    }
+
+    public List<Genre> getBooksGenre() {
+        return booksGenre;
     }
 }

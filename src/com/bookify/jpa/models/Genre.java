@@ -6,11 +6,13 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "genre")
 @JsonPropertyOrder({"genreId", "genreName"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="userId")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Genre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,13 +20,13 @@ public class Genre implements Serializable {
     private int id;
 
     @Column(name = "genreName")
-    private String name;
+    private String genreNewName;
 
     public Genre() {
     }
 
-    public Genre(String name) {
-        this.name = name;
+    public Genre(String genreName) {
+        this.genreNewName = genreName;
     }
 
     public int getId() {
@@ -36,10 +38,14 @@ public class Genre implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return genreNewName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String genreName) {
+        this.genreNewName = genreName;
     }
+
+   /* public Set<Book> getBookSet() {
+        return bookSet;
+    }*/
 }

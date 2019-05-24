@@ -14,6 +14,7 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Set;
 
 
 @Path("/v1.0")
@@ -65,7 +66,8 @@ public class BookifyApi extends Application {
     @Path("/books")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Book> getBookTitel(){
-        return br.getAllBooks();
+        List<Book> r = br.getAllBooks();
+        return r;
     }
 
     @POST
@@ -85,9 +87,21 @@ public class BookifyApi extends Application {
     }
 
     @GET
-    @Path ("/books/{bookAuthor}")
+    @Path ("/books/author/{bookAuthor}")
     @Produces (MediaType.APPLICATION_JSON)
     public Book getBookByAuthor(@PathParam("bookAuthor") String bookAuthor) { return br.findByBookAuthor(bookAuthor);
+    }
+
+    @GET
+    @Path ("/books/genre")
+    @Produces (MediaType.APPLICATION_JSON)
+    public List<Book> getAllGenre() { return br.getAllGenres();
+    }
+
+    @GET
+    @Path ("/books/genre/{genreName}")
+    @Produces (MediaType.APPLICATION_JSON)
+    public Book getBookByGenre(@PathParam("genreName") List<String> genreName) { return br.findByBookGenre(genreName);
     }
 
     /**Recensions delen av API:et med CRUD metoder*/
