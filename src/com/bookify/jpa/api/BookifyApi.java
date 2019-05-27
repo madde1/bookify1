@@ -13,6 +13,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +24,9 @@ public class BookifyApi extends Application {
 
     @Inject
     private UserRepository ur;
+
+    @Inject
+    private bookRepository br;
 
     @GET
     @Path("/users")
@@ -54,6 +58,37 @@ public class BookifyApi extends Application {
         return Response.ok(u.getFriends()).build();
     }
 
+    @GET
+    @Path("/users/{id}/wanttoread")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getWantToReadByUserId(@PathParam("id") int id) {
+        User u = ur.findById(id);
+        return Response.ok(u.getBooksToRead()).build();
+    }
+
+    @GET
+    @Path("/users/{id}/haveread")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHaveReadByUserId(@PathParam("id") int id) {
+        User u = ur.findById(id);
+        return Response.ok(u.getBooksHaveRead()).build();
+    }
+
+    @GET
+    @Path("/users/{id}/favourites")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFavouritesByUserId(@PathParam("id") int userId) {
+        User u = ur.findById(userId);
+        Set<Book> haveReads = u.getBooksHaveRead();
+        List<Book> favourites = new ArrayList<>();
+        for(Book b : haveReads) {
+            if(b.isFavourite(userId)) {
+                favourites.add(b);
+            }
+        }
+        return Response.ok(favourites).build();
+    }
+
     //Post metod för att lägga till användare.
     @POST
     @Path("/users")
@@ -67,7 +102,7 @@ public class BookifyApi extends Application {
     }
 
     @POST
-    @Path("/users/{id}/addfriend/{friendId}")
+    @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
@@ -83,7 +118,7 @@ public class BookifyApi extends Application {
     }
 
     @DELETE
-    @Path("/users/{id}/removefriend/{friendId}")
+    @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
@@ -98,8 +133,69 @@ public class BookifyApi extends Application {
         }
     }
 
-    @Inject
-    private bookRepository br;
+    @DELETE
+    @Path("/users/{id}/wanttoread/{book}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeWantToRead(@PathParam("id") int id, @PathParam("book") int bookId){
+        User user = ur.findById(id);
+        Book book = br.findByBookId(bookId);
+        if(user.getBooksToRead().contains(book)) {
+            user.removeWantToRead(book);
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
+        }
+    }
+
+    @POST
+    @Path("/users/{id}/wanttoread/{book}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addWantToRead(@PathParam("id") int id, @PathParam("book") int bookId){
+        User user = ur.findById(id);
+        Book book = br.findByBookId(bookId);
+        if(user.getBooksToRead().contains(book)) {
+            return Response.status(400).build();
+        } else {
+            user.addWantToRead(book);
+            return Response.status(201).build();
+        }
+    }
+
+    @DELETE
+    @Path("/users/{id}/haveread/{book}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeHaveRead(@PathParam("id") int id, @PathParam("book") int bookId){
+        User user = ur.findById(id);
+        Book book = br.findByBookId(bookId);
+        if(user.getBooksHaveRead().contains(book)) {
+            user.removeHaveRead(book);
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
+        }
+    }
+
+    @POST
+    @Path("/users/{id}/haveread/{book}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addHaveReadRead(@PathParam("id") int id, @PathParam("book") int bookId){
+        User user = ur.findById(id);
+        Book book = br.findByBookId(bookId);
+        if(user.getBooksHaveRead().contains(book)) {
+            return Response.status(400).build();
+        } else {
+            user.addHaveRead(book);
+            return Response.status(201).build();
+        }
+    }
 
     @GET
     @Path("/books")

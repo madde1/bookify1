@@ -42,6 +42,9 @@ public class Book implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "bookGenGId"))
     private List<Genre> booksGenre;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<HaveRead> haveReads;
 
     private Date bookDate;
 
@@ -79,5 +82,18 @@ public class Book implements Serializable {
 
     public List<Genre> getBooksGenre() {
         return booksGenre;
+    }
+
+    public Set<HaveRead> getHaveReads() {
+        return haveReads;
+    }
+
+    public boolean isFavourite(int userId) {
+        for(HaveRead hr : haveReads) {
+            if(hr.getIsFavourite() == 1 && hr.getUserId() == userId) {
+                return true;
+            }
+        }
+        return false;
     }
 }

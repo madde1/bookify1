@@ -19,6 +19,11 @@ public class bookRepository {
         return query.getResultList();
     }
 
+    public Book findByBookId(int bookId){
+        TypedQuery<Book> q = em.createQuery("SELECT b FROM Book b WHERE b.id = :bookId", Book.class);
+        return q.setParameter("bookId", bookId ).getSingleResult();
+    }
+
     public Book findByBookTitle(String bookTitle){
         TypedQuery<Book> q = em.createQuery("SELECT b FROM Book b WHERE b.bookTitel = :bookTitle", Book.class);
         return q.setParameter("bookTitle", bookTitle ).getSingleResult();
