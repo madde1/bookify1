@@ -21,6 +21,20 @@ import java.util.Set;
 @ApplicationPath("/api")
 public class BookifyApi extends Application {
 
+    @GET
+    @Path("/secured")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String secureApi() {
+        return "This requires login and you are verified";
+    }
+
+    @GET
+    @Path("/open")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String openApi() {
+        return "Open: no login required.";
+    }
+
     @Inject
     private UserRepository ur;
 
@@ -163,5 +177,7 @@ public class BookifyApi extends Application {
     public List<Review> getReview(){
         return rr.getAllReviews();
     }
+
+
 }
 

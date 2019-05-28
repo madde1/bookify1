@@ -33,6 +33,12 @@ public class User implements Serializable {
     @Column(name = "usersPassword")
     private String userPassword;
 
+    @Column(name = "usersSalt")
+    private String userSalt;
+
+    @Column(name = "usersIsAdmin")
+    private String userIsAdmin;
+
     @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(name = "wanttoread",
             joinColumns = @JoinColumn(name = "wantToReadUserId"),
@@ -105,6 +111,14 @@ public class User implements Serializable {
     public Set<Book> getBooksHaveRead() {
         return booksHaveRead;
     }
+
+    public String getUserSalt() { return userSalt; }
+
+    public void setUserSalt(String userSalt) { this.userSalt = userSalt; }
+
+    public String getUserIsAdmin() { return userIsAdmin;  }
+
+    public void setUserIsAdmin(String userIsAdmin) { this.userIsAdmin = userIsAdmin; }
 
     public Set<User> getFriends() {
         friends.addAll(friendOf);

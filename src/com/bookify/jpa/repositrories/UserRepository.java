@@ -39,4 +39,10 @@ public class UserRepository {
         return user;
     }
 
+    public EntityManager getEm() {
+        return em;
+    }
 }
+
+
+
