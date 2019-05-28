@@ -3,6 +3,7 @@ package com.bookify.jpa.models;
 
 import com.fasterxml.jackson.annotation.*;
 
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
 @Table(name = "book")
 @JsonPropertyOrder({"bookId","bookTitel","bookAuthor","bookDate"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="bookId")
-
+@SessionScoped
 public class Book implements Serializable {
 
     public Book(String bookTitel, String bookAuthor, Date bookDate) {
@@ -50,6 +51,17 @@ public class Book implements Serializable {
         this.reviewList = reviewList;
     }
 
+    /*
+    //Checks if the reviewId exists in the list
+    public boolean reviewQuery(int reviewId) {
+        return getReviewList().contains(reviewId);
+    }
+
+    //Removes the review from the list
+    public void removeReview(Review review) {
+        reviewList.remove(review);
+    }
+*/
     public Integer getBookId() {
         return bookId;
     }

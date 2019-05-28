@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "review")
@@ -94,4 +95,5 @@ public class Review implements Serializable {
     public void setReviewDate(Date reviewDate) {
         this.reviewDate = reviewDate;
     }
+
 }

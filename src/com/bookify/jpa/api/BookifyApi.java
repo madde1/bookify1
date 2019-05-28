@@ -159,8 +159,28 @@ public class BookifyApi extends Application {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Review> getReviewForBook(@PathParam("bookTitle") String bookTitle) {return rr.viewReviewForBook(bookTitle);}
 
+    //Delete review by id
+    @DELETE
+    @Path("/review/{reviewId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeReview(@PathParam("reviewId") int reviewId) {
+        rr.findById(reviewId);
+           return Response.ok("Recension borttagen" + rr.removeReview(reviewId)).build();
+    }
 
 
+    //Update review by id
+    @PUT
+    @Path("/review/{reviewId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response updateReview(@PathParam("reviewId") int reviewId, String newReview){
+      //  rr.findById(reviewId);
+        return Response.ok("Uppdaterat recention" + rr.updateReview(reviewId, newReview)).build();
 
-}
 
+        }
+    }
