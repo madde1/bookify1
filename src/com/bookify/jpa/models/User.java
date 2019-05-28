@@ -20,7 +20,7 @@ import java.util.Set;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usersId")
     private  Integer userId;
 
@@ -73,6 +73,34 @@ public class User implements Serializable {
 
     public User(){}
 
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
+
+    public void removeFriend(User friend) {
+        friends.remove(friend);
+        friendOf.remove(friend);
+    }
+
+    public boolean isFriendWith(User user) {
+        return getFriends().contains(user);
+    }
+
+    public void addWantToRead(Book book) {
+        booksToRead.add(book);
+    }
+
+    public void removeWantToRead(Book book) {
+        booksToRead.remove(book);
+    }
+
+    public void addHaveRead(Book book) {
+        booksHaveRead.add(book);
+    }
+
+    public void removeHaveRead(Book book) {
+        booksHaveRead.remove(book);
+    }
 
     public Integer getUserId() {
         return userId;
@@ -125,6 +153,11 @@ public class User implements Serializable {
         return friends;
     }
 
+    public Set<Book> getFavourites() {
+        Set<Book> favourites = getBooksHaveRead();
+        return favourites;
+    }
+
     public void setFriends(Set<User> friends) {
         this.friends = friends;
     }
@@ -137,21 +170,4 @@ public class User implements Serializable {
         this.friendOf = friendOf;
     }
 
-    public void addFriend(User friend) {
-        friends.add(friend);
-    }
-
-    public void removeFriends() {
-        this.friends = new HashSet<>();
-        this.friendOf = new HashSet<>();
-    }
-
-    public void removeFriend(User friend) {
-        friends.remove(friend);
-        friendOf.remove(friend);
-    }
-
-    public boolean isFriendWith(User user) {
-        return getFriends().contains(user);
-    }
 }

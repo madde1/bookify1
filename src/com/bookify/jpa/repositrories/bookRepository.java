@@ -1,6 +1,7 @@
 package com.bookify.jpa.repositrories;
 
 import com.bookify.jpa.models.Book;
+import com.bookify.jpa.models.Review;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +18,11 @@ public class bookRepository {
     public List<Book> getAllBooks(){
         Query query = em.createQuery("SELECT book FROM Book book order by book.bookTitel");
         return query.getResultList();
+    }
+
+    public Book findByBookId(int bookId){
+        TypedQuery<Book> q = em.createQuery("SELECT b FROM Book b WHERE b.id = :bookId", Book.class);
+        return q.setParameter("bookId", bookId ).getSingleResult();
     }
 
     public Book findByBookTitle(String bookTitle){
@@ -45,4 +51,9 @@ public class bookRepository {
         em.persist(book);
         return book;
     }
+
+    public void removeBook(Book book){
+        em.remove(book);
+    }
+
 }

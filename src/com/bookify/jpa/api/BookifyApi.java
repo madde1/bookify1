@@ -1,6 +1,7 @@
 package com.bookify.jpa.api;
 
 import com.bookify.jpa.models.Book;
+import com.bookify.jpa.models.HaveRead;
 import com.bookify.jpa.models.Review;
 import com.bookify.jpa.models.User;
 import com.bookify.jpa.repositrories.ReviewRepository;
@@ -13,6 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +39,9 @@ public class BookifyApi extends Application {
 
     @Inject
     private UserRepository ur;
+
+    @Inject
+    private bookRepository br;
 
     @GET
     @Path("/users")
@@ -68,6 +73,37 @@ public class BookifyApi extends Application {
         return Response.ok(u.getFriends()).build();
     }
 
+    @GET
+    @Path("/users/{id}/wanttoread")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getWantToReadByUserId(@PathParam("id") int id) {
+        User u = ur.findById(id);
+        return Response.ok(u.getBooksToRead()).build();
+    }
+
+    @GET
+    @Path("/users/{id}/haveread")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHaveReadByUserId(@PathParam("id") int id) {
+        User u = ur.findById(id);
+        return Response.ok(u.getBooksHaveRead()).build();
+    }
+
+    @GET
+    @Path("/users/{id}/favourites")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFavouritesByUserId(@PathParam("id") int userId) {
+        User u = getUserById(userId);
+        Set<Book> haveReads = u.getBooksHaveRead();
+        List<Book> favourites = new ArrayList<>();
+        for(Book b : haveReads) {
+            if(b.isFavourite(userId)) {
+                favourites.add(b);
+            }
+        }
+        return Response.ok(favourites).build();
+    }
+
     //Post metod för att lägga till användare.
     @POST
     @Path("/users")
@@ -81,13 +117,13 @@ public class BookifyApi extends Application {
     }
 
     @POST
-    @Path("/users/{id}/addfriend/{friendId}")
+    @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Response addFriend(@PathParam("id") int id, @PathParam("friendId") int friendId){
-        User user = ur.findById(id);
-        User friend = ur.findById(friendId);
+        User user = getUserById(id);
+        User friend = getUserById(friendId);
         if(user.isFriendWith(friend)) {
             return Response.status(400).build();
         } else {
@@ -97,13 +133,13 @@ public class BookifyApi extends Application {
     }
 
     @DELETE
-    @Path("/users/{id}/removefriend/{friendId}")
+    @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Response removeFriend(@PathParam("id") int id, @PathParam("friendId") int friendId){
-        User user = ur.findById(id);
-        User friend = ur.findById(friendId);
+        User user = getUserById(id);
+        User friend = getUserById(id);
         if(user.isFriendWith(friend)) {
             user.removeFriend(friend);
             return Response.status(200).build();
@@ -112,8 +148,108 @@ public class BookifyApi extends Application {
         }
     }
 
-    @Inject
-    private bookRepository br;
+    @POST
+    @Path("/users/{userId}/favourites/{bookId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response postUser(@PathParam("userId")int userId, @PathParam("bookId")int bookId){
+        Book book = br.findByBookId(bookId);
+        for(HaveRead hr : book.getHaveReads()) {
+            if(hr.getUserId() == userId) {
+                hr.setIsFavourite(1);
+                return Response.ok().build();
+            }
+        }
+        return Response.status(404).build();
+
+    }
+
+    @DELETE
+    @Path("/users/{id}/wanttoread/{book}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeWantToRead(@PathParam("id") int id, @PathParam("book") int bookId){
+        User user = getUserById(id);
+        Book book = br.findByBookId(bookId);
+        if(user.getBooksToRead().contains(book)) {
+            user.removeWantToRead(book);
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
+        }
+    }
+
+    @PATCH
+    @Path("/users/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    // Update name and email
+    public Response editUser(@PathParam("id") int id, User user){
+        getUserById(id).setUserName(user.getUserName());
+        getUserById(id).setUserEmail(user.getUserEmail());
+        return Response.ok().build();
+    }
+
+    @DELETE
+    @Path("/users/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeUser(@PathParam("id") int id){
+        ur.delete(getUserById(id));
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/users/{id}/wanttoread/{book}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addWantToRead(@PathParam("id") int id, @PathParam("book") int bookId){
+        User user = getUserById(id);
+        Book book = br.findByBookId(bookId);
+        if(user.getBooksToRead().contains(book)) {
+            return Response.status(400).build();
+        } else {
+            user.addWantToRead(book);
+            return Response.status(201).build();
+        }
+    }
+
+    @DELETE
+    @Path("/users/{id}/haveread/{book}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeHaveRead(@PathParam("id") int id, @PathParam("book") int bookId){
+        User user = getUserById(id);
+        Book book = br.findByBookId(bookId);
+        if(user.getBooksHaveRead().contains(book)) {
+            user.removeHaveRead(book);
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
+        }
+    }
+
+    @POST
+    @Path("/users/{id}/haveread/{book}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addHaveReadRead(@PathParam("id") int id, @PathParam("book") int bookId){
+        User user = getUserById(id);
+        Book book = br.findByBookId(bookId);
+        if(user.getBooksHaveRead().contains(book)) {
+            return Response.status(400).build();
+        } else {
+            user.addHaveRead(book);
+            return Response.status(201).build();
+        }
+    }
 
     @GET
     @Path("/books")
@@ -121,6 +257,20 @@ public class BookifyApi extends Application {
     public List<Book> getBookTitel(){
         List<Book> r = br.getAllBooks();
         return r;
+    }
+    @DELETE
+    @Path("/books/{bookId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response deleteBook(@PathParam("bookId") int bookId ){
+        Book book = br.findByBookId(bookId);
+        if (book.getBookId().equals(bookId)) {
+            br.removeBook(book);
+            return Response.status(200).build();
+        }else {
+            return Response.status(400).build();
+        }
     }
 
     @POST
@@ -145,6 +295,7 @@ public class BookifyApi extends Application {
     public Book getBookByAuthor(@PathParam("bookAuthor") String bookAuthor) { return br.findByBookAuthor(bookAuthor);
     }
 
+
     @GET
     @Path ("/books/genre")
     @Produces (MediaType.APPLICATION_JSON)
@@ -156,6 +307,7 @@ public class BookifyApi extends Application {
     @Produces (MediaType.APPLICATION_JSON)
     public Book getBookByGenre(@PathParam("genreName") List<String> genreName) { return br.findByBookGenre(genreName);
     }
+
 
     /**Recensions delen av API:et med CRUD metoder*/
     @Inject
@@ -178,6 +330,37 @@ public class BookifyApi extends Application {
         return rr.getAllReviews();
     }
 
-
 }
 
+
+    //Get review by bookTitle
+    @GET
+    @Path("/review/{bookTitle}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Review> getReviewForBook(@PathParam("bookTitle") String bookTitle) {return rr.viewReviewForBook(bookTitle);}
+
+    //Delete review by id
+    @DELETE
+    @Path("/review/{reviewId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response removeReview(@PathParam("reviewId") int reviewId) {
+        rr.findById(reviewId);
+           return Response.ok("Recension borttagen" + rr.removeReview(reviewId)).build();
+    }
+
+
+    //Update review by id
+    @PUT
+    @Path("/review/{reviewId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response updateReview(@PathParam("reviewId") int reviewId, String newReview){
+      //  rr.findById(reviewId);
+        return Response.ok("Uppdaterat recention" + rr.updateReview(reviewId, newReview)).build();
+
+
+        }
+    }

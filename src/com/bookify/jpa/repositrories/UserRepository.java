@@ -39,9 +39,15 @@ public class UserRepository {
         return user;
     }
 
+
     public EntityManager getEm() {
         return em;
     }
+
+    public void delete(User user) {
+        em.remove(user);
+    }
+
 }
 
 
