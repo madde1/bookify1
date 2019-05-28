@@ -17,12 +17,25 @@ FOREIGN KEY (wantToReadUserId) REFERENCES users(usersId),
 FOREIGN KEY (wantToReadBookId) REFERENCES book(bookId)
 );
 
-create table haveRead(
+#Old
+/*create table haveRead(
 haveReadId int not null auto_increment,
 haveReadBookId int not null,
 haveReadUserId int not null,
 haveReadFavorite int not null,
 primary key(haveReadId),
+FOREIGN KEY (haveReadUserId) REFERENCES users(usersId),
+FOREIGN KEY (haveReadBookId) REFERENCES book(bookId)
+);*/
+
+DROP TABLES IF EXISTS haveRead;
+
+#New
+create table haveRead(
+haveReadBookId int not null,
+haveReadUserId int not null,
+haveReadFavorite int not null DEFAULT FALSE,
+primary key(haveReadBookId, haveReadUserId),
 FOREIGN KEY (haveReadUserId) REFERENCES users(usersId),
 FOREIGN KEY (haveReadBookId) REFERENCES book(bookId)
 );

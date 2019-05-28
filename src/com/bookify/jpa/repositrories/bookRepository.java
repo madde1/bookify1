@@ -20,6 +20,11 @@ public class bookRepository {
         return query.getResultList();
     }
 
+    public Book findByBookId(int bookId){
+        TypedQuery<Book> q = em.createQuery("SELECT b FROM Book b WHERE b.id = :bookId", Book.class);
+        return q.setParameter("bookId", bookId ).getSingleResult();
+    }
+
     public Book findByBookTitle(String bookTitle){
         TypedQuery<Book> q = em.createQuery("SELECT b FROM Book b WHERE b.bookTitel = :bookTitle", Book.class);
         return q.setParameter("bookTitle", bookTitle ).getSingleResult();
@@ -28,6 +33,18 @@ public class bookRepository {
     public Book findByBookAuthor(String bookAuthor) {
         TypedQuery<Book> authorQuery = em.createQuery("SELECT b FROM Book b WHERE b.bookAuthor = :bookAuthor", Book.class);
         return authorQuery.setParameter("bookAuthor", bookAuthor).getSingleResult();
+    }
+
+    public List<Book> getAllGenres() {
+        Query query = em.createQuery("SELECT book.booksGenre FROM Book book order by bookId");
+        return query.getResultList();
+    }
+
+    //last change was that I tried to set parameter as type List, instead of a single String!
+   public Book findByBookGenre(List<String> genreName) {
+        TypedQuery <Book> genreQuery = em.createQuery("SELECT b FROM Book b JOIN b.booksGenre bg WHERE bg.genreNewName = :genreName", Book.class);
+
+        return genreQuery.setParameter("genreName", genreName).getSingleResult();
     }
 
     public Book create(Book book){
