@@ -244,6 +244,20 @@ public class BookifyApi extends Application {
         List<Book> r = br.getAllBooks();
         return r;
     }
+    @DELETE
+    @Path("/books/{bookId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response deleteBook(@PathParam("bookId") int bookId ){
+        Book book = br.findByBookId(bookId);
+        if (book.getBookId().equals(bookId)) {
+            br.removeBook(book);
+            return Response.status(200).build();
+        }else {
+            return Response.status(400).build();
+        }
+    }
 
     @POST
     @Path("/books")

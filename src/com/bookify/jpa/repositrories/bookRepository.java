@@ -52,9 +52,8 @@ public class bookRepository {
         return book;
     }
 
-
-
-
-
+    public void removeBook(Book book){
+        em.remove(book);
+    }
 
 }
