@@ -39,4 +39,8 @@ public class UserRepository {
         return user;
     }
 
+    public void delete(User user) {
+        em.remove(user);
+    }
+
 }
