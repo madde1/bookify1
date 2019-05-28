@@ -244,6 +244,7 @@ public class BookifyApi extends Application {
         List<Book> r = br.getAllBooks();
         return r;
     }
+    //Delete book by ID
     @DELETE
     @Path("/books/{bookId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -257,6 +258,25 @@ public class BookifyApi extends Application {
         }else {
             return Response.status(400).build();
         }
+    }
+    //get book by id (for admin purposes)
+    @GET
+    @Path("/books/{bookId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Book getBookById(@PathParam("bookId") int id) { return br.findByBookId(id);
+    }
+
+    @PATCH
+    @Path("/books/{bookId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response updateBook(@PathParam("bookId") int bookId, Book book ){
+        getBookById(bookId).setBookAuthor(book.getBookAuthor());
+        getBookById(bookId).setBookTitel(book.getBookTitel());
+        getBookById(bookId).setBookDate(book.getBookDate());
+
+        return Response.ok("Boken är uppdaterad!").build();
     }
 
     @POST
