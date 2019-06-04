@@ -23,7 +23,7 @@ public class Review implements Serializable {
     public Review(){}
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reviewId")
     private  Integer reviewId;
 

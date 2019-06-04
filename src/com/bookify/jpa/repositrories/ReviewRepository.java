@@ -6,6 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ReviewRepository {
@@ -18,6 +21,9 @@ public class ReviewRepository {
         return query.getResultList();
     }
     public Review create(Review review){
+        //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        review.setReviewDate(date);
         em.persist(review);
         return review;
     }

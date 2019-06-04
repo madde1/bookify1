@@ -350,9 +350,6 @@ public class BookifyApi extends Application {
         return rr.getAllReviews();
     }
 
-}
-
-
     //Get review by bookTitle
     @GET
     @Path("/review/{bookTitle}")

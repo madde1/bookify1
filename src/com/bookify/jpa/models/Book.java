@@ -26,7 +26,7 @@ public class Book implements Serializable {
     }
     public Book(){}
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     @Column(name = "bookId")
     private  Integer bookId;
 
@@ -46,7 +46,7 @@ public class Book implements Serializable {
     @JoinTable(name = "bookgen",
             joinColumns = @JoinColumn(name = "bookGenBId"),
             inverseJoinColumns = @JoinColumn(name = "bookGenGId"))
-    private List<Genre> booksGenre;
+    private Set<Genre> booksGenre;
 
     @JsonIgnore
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -111,7 +111,7 @@ public class Book implements Serializable {
         this.bookDate = bookDate;
     }
 
-    public List<Genre> getBooksGenre() {
+    public Set<Genre> getBooksGenre() {
         return booksGenre;
     }
 
