@@ -36,24 +36,10 @@ public class Review implements Serializable {
     @Column(name = "reviewText")
     private String reviewText;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "reviewbookId", insertable=false, updatable=false)
-    private Book book;
-
-    @JsonIgnore
-    public Book getBooks() {
-        return book;
-    }
-
-    public void setBooks(Book books) {
-        this.book = books;
-    }
-
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Column(name = "reviewDate")
     private Date reviewDate;
+
 
     public Integer getReviewId() {
         return reviewId;
@@ -96,4 +82,17 @@ public class Review implements Serializable {
         this.reviewDate = reviewDate;
     }
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "reviewbookId", insertable=false, updatable=false)
+    private Book book;
+
+    @JsonIgnore
+    public Book getBooks() {
+        return book;
+    }
+
+    public void setBooks(Book books) {
+        this.book = books;
+    }
 }

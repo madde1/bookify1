@@ -2,6 +2,8 @@ package com.bookify.jpa.models;
 
 
 import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
@@ -42,6 +44,7 @@ public class Book implements Serializable {
     private Date bookDate;
     
     @ManyToMany( fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     @JoinTable(name = "bookgen",
             joinColumns = @JoinColumn(name = "bookGenBId"),
@@ -58,6 +61,7 @@ public class Book implements Serializable {
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "reviewbookId")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviewList = new ArrayList<Review>();
 
     public List<Review> getReviewList() {
