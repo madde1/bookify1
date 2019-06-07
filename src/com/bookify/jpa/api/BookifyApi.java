@@ -6,6 +6,8 @@ import com.bookify.jpa.models.HaveRead;
 import com.bookify.jpa.models.Review;
 import com.bookify.jpa.models.User;
 import javax.inject.Inject;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
@@ -227,17 +229,17 @@ public class BookifyApi extends Application {
     }
 
     @POST
-    @Path("/books")
+    @Path("/secured/books")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public  Response postBook(Book book){
+    public Response postBook(Book book){
         return bl.postBook(book);
     }
 
 
     @GET
-    @Path ("/books/{bookTitle}")
+    @Path ("/books/title/{bookTitle}")
     @Produces (MediaType.APPLICATION_JSON)
     public Book getBookByTitle(@PathParam("bookTitle") String bookTitle) {
         return bl.getBookByTitle(bookTitle);
