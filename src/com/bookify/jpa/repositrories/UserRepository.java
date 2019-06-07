@@ -28,10 +28,14 @@ public class UserRepository {
         return u;
     }
 
-    public User findByUserName(String userName){
+    public User findUserByUsernameOrId(String userName){
         TypedQuery<User> queUserName = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
-        User u = queUserName.setParameter("userName",userName).getSingleResult();
-        return u;
+        if(queUserName.setParameter("userName",userName).getResultList().size() > 0) {
+            User u = queUserName.setParameter("userName", userName).getSingleResult();
+            return u;
+        } else {
+            return findById(Integer.parseInt(userName));
+        }
     }
 
     public User create(User user){

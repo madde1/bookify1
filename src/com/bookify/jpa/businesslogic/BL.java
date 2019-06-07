@@ -10,10 +10,6 @@ import com.bookify.jpa.repositrories.UserRepository;
 import com.bookify.jpa.repositrories.bookRepository;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +31,12 @@ public class BL {
         return ur.getAllUsers();
     }
 
-    public User getUserById(int id) {
+    private User getUserById(int id) {
         return ur.findById(id);
     }
 
-    public User getUserByUserName(String userName) {
-        return ur.findByUserName(userName);
+    public User getUser(String userName) {
+        return ur.findUserByUsernameOrId(userName);
     }
 
     public Response getFriendsByUserId(int id) {

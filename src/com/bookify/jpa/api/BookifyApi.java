@@ -2,20 +2,19 @@ package com.bookify.jpa.api;
 
 import com.bookify.jpa.businesslogic.BL;
 import com.bookify.jpa.models.Book;
-import com.bookify.jpa.models.HaveRead;
 import com.bookify.jpa.models.Review;
 import com.bookify.jpa.models.User;
 import javax.inject.Inject;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 @Path("/v1.0")
@@ -47,25 +46,13 @@ public class BookifyApi extends Application {
         return bl.getUserName();
     }
 
-
-    //get user by id (for admin purposes)
-    @GET
-    @Path("/users/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public User getUserById(@PathParam("id") int id) {
-        return bl.getUserById(id);
-
-    }
-
-    //get user by username
+    //get user by username or id
     @GET
     @Path("/users/{userName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getUserByUserName(@PathParam("userName") String userName) {
-        return bl.getUserByUserName(userName);
+    public User getUser(@PathParam("userName") String userName) {
+        return bl.getUser(userName);
     }
-
-
 
     @GET
     @Path("/users/{id}/friends")
@@ -74,14 +61,12 @@ public class BookifyApi extends Application {
         return bl.getFriendsByUserId(id);
     }
 
-
     @GET
     @Path("/users/{id}/wanttoread")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getWantToReadByUserId(@PathParam("id") int id) {
        return bl.getWantToReadByUserId(id);
     }
-
 
     @GET
     @Path("/users/{id}/haveread")
@@ -97,7 +82,6 @@ public class BookifyApi extends Application {
         return bl.getFavouritesByUserId(userId);
     }
 
-
     //Post metod för att lägga till användare.
     @POST
     @Path("/users")
@@ -109,7 +93,6 @@ public class BookifyApi extends Application {
 
     }
 
-
     @POST
     @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -118,7 +101,6 @@ public class BookifyApi extends Application {
     public Response addFriend(@PathParam("id") int id, @PathParam("friendId") int friendId){
         return bl.addFriend(id, friendId);
     }
-
 
     @DELETE
     @Path("/users/{id}/friends/{friendId}")
@@ -210,7 +192,6 @@ public class BookifyApi extends Application {
         return bl.deleteBook(bookId);
     }
 
-
     //get book by id (for admin purposes)
     @GET
     @Path("/books/{bookId}")
@@ -237,7 +218,6 @@ public class BookifyApi extends Application {
         return bl.postBook(book);
     }
 
-
     @GET
     @Path ("/books/title/{bookTitle}")
     @Produces (MediaType.APPLICATION_JSON)
@@ -251,7 +231,6 @@ public class BookifyApi extends Application {
     public Book getBookByAuthor(@PathParam("bookAuthor") String bookAuthor) {
         return bl.getBookByAuthor(bookAuthor);
     }
-
 
     @GET
     @Path ("/books/genre")
