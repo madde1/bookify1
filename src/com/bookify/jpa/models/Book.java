@@ -28,7 +28,7 @@ public class Book implements Serializable {
     }
     public Book(){}
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bookId")
     private  Integer bookId;
 
