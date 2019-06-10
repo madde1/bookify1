@@ -1,3 +1,7 @@
+/**
+ * @Authors: Anna, Madeleine, Andreas, Simon, Lucie
+ * @version 1.0
+ * **/
 package com.bookify.jpa.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,7 +19,7 @@ import java.io.Serializable;
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="apiUsersId")
     @JsonFormat()
     @SessionScoped
-    public class ApiUsers implements Serializable {
+    public class ApiUsers<JsonPropertyOrder> implements Serializable {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
