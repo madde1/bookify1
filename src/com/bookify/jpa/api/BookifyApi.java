@@ -365,7 +365,7 @@ public class BookifyApi extends Application {
      * Get review by bookTitle
      */
     @GET
-    @Path("/review/{bookTitle}")
+    @Path("/reviews/{bookTitle}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Review> getReviewForBook(@PathParam("bookTitle") String bookTitle) {
         return bl.getReviewForBook(bookTitle);
@@ -376,7 +376,7 @@ public class BookifyApi extends Application {
      * Delete review by id
      */
     @DELETE
-    @Path("/review/{reviewId}")
+    @Path("/reviews/{reviewId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
@@ -388,7 +388,7 @@ public class BookifyApi extends Application {
      * Update review by id
      */
     @PUT
-    @Path("/review/{reviewId}")
+    @Path("/reviews/{reviewId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
