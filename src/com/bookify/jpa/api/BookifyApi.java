@@ -342,7 +342,7 @@ public class BookifyApi extends Application {
      * Post mehtod to add a review to a book
      */
     @POST
-    @Path("/review")
+    @Path("/reviews")
     @Transactional
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -354,7 +354,7 @@ public class BookifyApi extends Application {
      * Get all the review
      */
     @GET
-    @Path("/review")
+    @Path("/reviews")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Review> getReview() {
         return bl.getReview();
