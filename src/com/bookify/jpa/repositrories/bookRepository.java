@@ -44,7 +44,7 @@ public class bookRepository {
     }
 
     public List<Book> getAllGenres() {
-        Query query = em.createQuery("SELECT book.booksGenre FROM Book book order by bookId");
+        Query query = em.createQuery("SELECT genre.genreNewName FROM Genre genre");
         return query.getResultList();
     }
 
