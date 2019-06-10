@@ -21,7 +21,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-
+/**This class contains the API Methods that calls on the business logic part
+ *  and returns information to the users. */
 @Path("/v1.0")
 @ApplicationPath("/api")
 public class BookifyApi extends Application {
@@ -43,7 +44,10 @@ public class BookifyApi extends Application {
         return "Open: no login required.";
     }
 
+    /**From here are the User methods**/
 
+    /**Gets all the users
+     * @return getUserName*/
     @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +55,7 @@ public class BookifyApi extends Application {
         return bl.getUserName();
     }
 
-    //get user by username or id
+    /**get user by username or id*/
     @GET
     @Path("/users/{userName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,6 +63,7 @@ public class BookifyApi extends Application {
         return bl.getUser(userName);
     }
 
+    /**Gets all the friends from one user.*/
     @GET
     @Path("/users/{id}/friends")
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,6 +71,7 @@ public class BookifyApi extends Application {
         return bl.getFriendsByUserId(id);
     }
 
+    /**Gets all the books one user wants to read.*/
     @GET
     @Path("/users/{id}/wanttoread")
     @Produces(MediaType.APPLICATION_JSON)
@@ -73,6 +79,7 @@ public class BookifyApi extends Application {
        return bl.getWantToReadByUserId(id);
     }
 
+    /**Gets all the books one user have read.*/
     @GET
     @Path("/users/{id}/haveread")
     @Produces(MediaType.APPLICATION_JSON)
@@ -80,6 +87,7 @@ public class BookifyApi extends Application {
         return bl.getHaveReadByUserId(id);
     }
 
+    /**Gets all favorites of one user. */
     @GET
     @Path("/users/{id}/favourites")
     @Produces(MediaType.APPLICATION_JSON)
@@ -87,7 +95,7 @@ public class BookifyApi extends Application {
         return bl.getFavouritesByUserId(userId);
     }
 
-    //Post metod för att lägga till användare.
+    /**Post Method too add Users.*/
     @POST
     @Path("/users")
     @Produces(MediaType.TEXT_PLAIN)
@@ -98,6 +106,7 @@ public class BookifyApi extends Application {
 
     }
 
+    /**Post method for adding a friend to one specific user*/
     @POST
     @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -107,6 +116,7 @@ public class BookifyApi extends Application {
         return bl.addFriend(id, friendId);
     }
 
+    /**Delete mehtod for removing a friend from one specific user.*/
     @DELETE
     @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -116,6 +126,7 @@ public class BookifyApi extends Application {
      return bl.removeFriend(id, friendId);
     }
 
+    /**Post method to add a book in favourites for one user.*/
     @POST
     @Path("/users/{userId}/favourites/{bookId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -125,6 +136,7 @@ public class BookifyApi extends Application {
       return bl.postUser(userId, bookId);
     }
 
+    /**Delete a book from a users want to read list.*/
     @DELETE
     @Path("/users/{id}/wanttoread/{book}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -134,6 +146,7 @@ public class BookifyApi extends Application {
         return bl.removeWantToRead(id, bookId);
     }
 
+    /**Patch method to update users, updates email and name. */
     @PATCH
     @Path("/users/{id}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -144,6 +157,7 @@ public class BookifyApi extends Application {
         return bl.editUser(id, user);
     }
 
+    /**Delete method that removes a user. */
     @DELETE
     @Path("/users/{id}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -153,6 +167,7 @@ public class BookifyApi extends Application {
        return bl.removeUser(id);
     }
 
+    /**Post method that adds a book to the users want to read list.*/
     @POST
     @Path("/users/{id}/wanttoread/{book}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -162,6 +177,7 @@ public class BookifyApi extends Application {
         return bl.addWantToRead(id, bookId);
     }
 
+    /**Delete method for have read , removes one book from a users have read list.*/
     @DELETE
     @Path("/users/{id}/haveread/{book}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -171,6 +187,7 @@ public class BookifyApi extends Application {
         return bl.removeHaveRead(id, bookId);
     }
 
+    /**Post method for adding a book to a users have read list*/
     @POST
     @Path("/users/{id}/haveread/{book}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -180,6 +197,9 @@ public class BookifyApi extends Application {
         return bl.addHaveRead(id,bookId);
     }
 
+    /**Here starts the books Methods
+     *
+     * Get method for books. Gets all the books in the database*/
     @GET
     @Path("/books")
     @Produces(MediaType.APPLICATION_JSON)
@@ -187,7 +207,7 @@ public class BookifyApi extends Application {
         return bl.getBookTitel();
     }
 
-    //Delete book by ID
+    /**Delete book by ID*/
     @DELETE
     @Path("/books/{bookId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -197,14 +217,14 @@ public class BookifyApi extends Application {
         return bl.deleteBook(bookId);
     }
 
-    //get book by id (for admin purposes)
+    /**Get book by id (for admin purposes)*/
     @GET
     @Path("/books/{bookId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Book getBookById(@PathParam("bookId") int id) {
         return bl.getBookById(id);
     }
-
+    /**Patch to update a book*/
     @PATCH
     @Path("/books/{bookId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -213,7 +233,7 @@ public class BookifyApi extends Application {
     public Response updateBook(@PathParam("bookId") int bookId, Book book ){
         return bl.updateBook(bookId,book);
     }
-
+    /**Post to add a new book to the database. Only admin can use this one.*/
     @POST
     @Path("/secured/books")
     @Produces(MediaType.TEXT_PLAIN)
@@ -222,28 +242,28 @@ public class BookifyApi extends Application {
     public Response postBook(Book book){
         return bl.postBook(book);
     }
-
+    /**Get method to get book titles.*/
     @GET
     @Path ("/books/title/{bookTitle}")
     @Produces (MediaType.APPLICATION_JSON)
     public Book getBookByTitle(@PathParam("bookTitle") String bookTitle) {
         return bl.getBookByTitle(bookTitle);
     }
-
+    /**Get the books authors.*/
     @GET
     @Path ("/books/author/{bookAuthor}")
     @Produces (MediaType.APPLICATION_JSON)
     public Book getBookByAuthor(@PathParam("bookAuthor") String bookAuthor) {
         return bl.getBookByAuthor(bookAuthor);
     }
-
+    /**Gets the books by genre*/
     @GET
     @Path ("/books/genre")
     @Produces (MediaType.APPLICATION_JSON)
     public List<Book> getAllGenre() {
         return bl.getAllGenre();
     }
-
+    /**Gets the books in one genre*/
     @GET
     @Path ("/books/genre/{genreName}")
     @Produces (MediaType.APPLICATION_JSON)
@@ -252,9 +272,9 @@ public class BookifyApi extends Application {
     }
 
 
-    /**Recensions delen av API:et med CRUD metoder*/
-
-
+    /**Review parts starts here
+     *
+     *Post mehtod to add a review to a book*/
     @POST
     @Path("/review")
     @Transactional
@@ -263,8 +283,7 @@ public class BookifyApi extends Application {
     public Response postReview(Review review){
         return bl.postReview(review);
     }
-
-
+    /**Get all the review*/
     @GET
     @Path("/review")
     @Produces(MediaType.APPLICATION_JSON)
@@ -273,7 +292,7 @@ public class BookifyApi extends Application {
     }
 
 
-    //Get review by bookTitle
+    /**Get review by bookTitle*/
     @GET
     @Path("/review/{bookTitle}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -282,7 +301,7 @@ public class BookifyApi extends Application {
     }
 
 
-    //Delete review by id
+    /**Delete review by id*/
     @DELETE
     @Path("/review/{reviewId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -292,7 +311,7 @@ public class BookifyApi extends Application {
         return bl.removeReview(reviewId);
     }
 
-    //Update review by id
+    /**Update review by id*/
     @PUT
     @Path("/review/{reviewId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -301,6 +320,4 @@ public class BookifyApi extends Application {
     public Response updateReview(@PathParam("reviewId") int reviewId, String newReview){
         return bl.updateReview(reviewId, newReview);
         }
-
-
     }
