@@ -331,7 +331,7 @@ public class BookifyApi extends Application {
     @GET
     @Path("/books/genre/{genreName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Book getBookByGenre(@PathParam("genreName") List<String> genreName) {
+    public List<Book> getBookByGenre(@PathParam("genreName") List<String> genreName) {
         return bl.getBookByGenre(genreName);
     }
 

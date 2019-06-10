@@ -49,10 +49,10 @@ public class bookRepository {
     }
 
     //last change was that I tried to set parameter as type List, instead of a single String!
-   public Book findByBookGenre(List<String> genreName) {
+   public List<Book> findByBookGenre(List<String> genreName) {
         TypedQuery <Book> genreQuery = em.createQuery("SELECT b FROM Book b JOIN b.booksGenre bg WHERE bg.genreNewName = :genreName", Book.class);
 
-        return genreQuery.setParameter("genreName", genreName).getSingleResult();
+        return genreQuery.setParameter("genreName", genreName).getResultList();
     }
 
     public Book create(Book book){
