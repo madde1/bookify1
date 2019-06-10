@@ -254,7 +254,7 @@ public class BL {
         return br.getAllGenres();
     }
 
-    public Book getBookByGenre(List<String> genreName) {
+    public List<Book> getBookByGenre(List<String> genreName) {
         return br.findByBookGenre(genreName);
     }
 

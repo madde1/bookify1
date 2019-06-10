@@ -23,7 +23,7 @@ import java.io.Serializable;
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="apiUsersId")
     @JsonFormat()
     @SessionScoped
-    public class ApiUsers<JsonPropertyOrder> implements Serializable {
+    public class ApiUsers implements Serializable {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
