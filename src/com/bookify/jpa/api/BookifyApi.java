@@ -46,8 +46,11 @@ public class BookifyApi extends Application {
 
     /**From here are the User methods**/
 
-    /**Gets all the users
-     * @return getUserName*/
+    /**
+     * Gets all the users
+     *
+     * @return getUserName
+     */
     @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
@@ -55,7 +58,9 @@ public class BookifyApi extends Application {
         return bl.getUserName();
     }
 
-    /**get user by username or id*/
+    /**
+     * get user by username or id
+     */
     @GET
     @Path("/users/{userName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -63,7 +68,9 @@ public class BookifyApi extends Application {
         return bl.getUser(userName);
     }
 
-    /**Gets all the friends from one user.*/
+    /**
+     * Gets all the friends from one user.
+     */
     @GET
     @Path("/users/{id}/recommendation")
     @Produces(MediaType.APPLICATION_JSON)
@@ -78,15 +85,19 @@ public class BookifyApi extends Application {
         return bl.getFriendsByUserId(id);
     }
 
-    /**Gets all the books one user wants to read.*/
+    /**
+     * Gets all the books one user wants to read.
+     */
     @GET
     @Path("/users/{id}/wanttoread")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getWantToReadByUserId(@PathParam("id") int id) {
-       return bl.getWantToReadByUserId(id);
+        return bl.getWantToReadByUserId(id);
     }
 
-    /**Gets all the books one user have read.*/
+    /**
+     * Gets all the books one user have read.
+     */
     @GET
     @Path("/users/{id}/haveread")
     @Produces(MediaType.APPLICATION_JSON)
@@ -94,7 +105,9 @@ public class BookifyApi extends Application {
         return bl.getHaveReadByUserId(id);
     }
 
-    /**Gets all favorites of one user. */
+    /**
+     * Gets all favorites of one user.
+     */
     @GET
     @Path("/users/{id}/favourites")
     @Produces(MediaType.APPLICATION_JSON)
@@ -102,204 +115,255 @@ public class BookifyApi extends Application {
         return bl.getFavouritesByUserId(userId);
     }
 
-    /**Post Method too add Users.*/
+    /**
+     * Post Method too add Users.
+     */
     @POST
     @Path("/users")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response postUser(User user){
+    public Response postUser(User user) {
         return bl.postUser(user);
 
     }
 
-    /**Post method for adding a friend to one specific user*/
+    /**
+     * Post method for adding a friend to one specific user
+     */
     @POST
     @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addFriend(@PathParam("id") int id, @PathParam("friendId") int friendId){
+    public Response addFriend(@PathParam("id") int id, @PathParam("friendId") int friendId) {
         return bl.addFriend(id, friendId);
     }
 
-    /**Delete mehtod for removing a friend from one specific user.*/
+    /**
+     * Delete mehtod for removing a friend from one specific user.
+     */
     @DELETE
     @Path("/users/{id}/friends/{friendId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response removeFriend(@PathParam("id") int id, @PathParam("friendId") int friendId){
-     return bl.removeFriend(id, friendId);
+    public Response removeFriend(@PathParam("id") int id, @PathParam("friendId") int friendId) {
+        return bl.removeFriend(id, friendId);
     }
 
-    /**Post method to add a book in favourites for one user.*/
+    /**
+     * Post method to add a book in favourites for one user.
+     */
     @POST
     @Path("/users/{userId}/favourites/{bookId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response postUser(@PathParam("userId")int userId, @PathParam("bookId")int bookId){
-      return bl.postUser(userId, bookId);
+    public Response postUser(@PathParam("userId") int userId, @PathParam("bookId") int bookId) {
+        return bl.postUser(userId, bookId);
     }
 
-    /**Delete a book from a users want to read list.*/
+    /**
+     * Delete a book from a users want to read list.
+     */
     @DELETE
     @Path("/users/{id}/wanttoread/{book}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response removeWantToRead(@PathParam("id") int id, @PathParam("book") int bookId){
+    public Response removeWantToRead(@PathParam("id") int id, @PathParam("book") int bookId) {
         return bl.removeWantToRead(id, bookId);
     }
 
-    /**Patch method to update users, updates email and name. */
+    /**
+     * Patch method to update users, updates email and name.
+     */
     @PATCH
     @Path("/users/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     // Update name and email
-    public Response editUser(@PathParam("id") int id, User user){
+    public Response editUser(@PathParam("id") int id, User user) {
         return bl.editUser(id, user);
     }
 
-    /**Delete method that removes a user. */
+    /**
+     * Delete method that removes a user.
+     */
     @DELETE
     @Path("/users/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response removeUser(@PathParam("id") int id){
-       return bl.removeUser(id);
+    public Response removeUser(@PathParam("id") int id) {
+        return bl.removeUser(id);
     }
 
-    /**Post method that adds a book to the users want to read list.*/
+    /**
+     * Post method that adds a book to the users want to read list.
+     */
     @POST
     @Path("/users/{id}/wanttoread/{book}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addWantToRead(@PathParam("id") int id, @PathParam("book") int bookId){
+    public Response addWantToRead(@PathParam("id") int id, @PathParam("book") int bookId) {
         return bl.addWantToRead(id, bookId);
     }
 
-    /**Delete method for have read , removes one book from a users have read list.*/
+    /**
+     * Delete method for have read , removes one book from a users have read list.
+     */
     @DELETE
     @Path("/users/{id}/haveread/{book}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response removeHaveRead(@PathParam("id") int id, @PathParam("book") int bookId){
+    public Response removeHaveRead(@PathParam("id") int id, @PathParam("book") int bookId) {
         return bl.removeHaveRead(id, bookId);
     }
 
-    /**Post method for adding a book to a users have read list*/
+    /**
+     * Post method for adding a book to a users have read list
+     */
     @POST
     @Path("/users/{id}/haveread/{book}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addHaveRead(@PathParam("id") int id, @PathParam("book") int bookId){
-        return bl.addHaveRead(id,bookId);
+    public Response addHaveRead(@PathParam("id") int id, @PathParam("book") int bookId) {
+        return bl.addHaveRead(id, bookId);
     }
 
-    /**Here starts the books Methods
-     *
-     * Get method for books. Gets all the books in the database*/
+    /**
+     * Here starts the books Methods
+     * <p>
+     * Get method for books. Gets all the books in the database
+     */
     @GET
     @Path("/books")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Book> getBookTitel(){
+    public List<Book> getBookTitel() {
         return bl.getBookTitel();
     }
 
-    /**Delete book by ID*/
+    /**
+     * Delete book by ID
+     */
     @DELETE
     @Path("/books/{bookId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response deleteBook(@PathParam("bookId") int bookId ){
+    public Response deleteBook(@PathParam("bookId") int bookId) {
         return bl.deleteBook(bookId);
     }
 
-    /**Get book by id (for admin purposes)*/
+    /**
+     * Get book by id (for admin purposes)
+     */
     @GET
     @Path("/books/{bookId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Book getBookById(@PathParam("bookId") int id) {
         return bl.getBookById(id);
     }
-    /**Patch to update a book*/
+
+    /**
+     * Patch to update a book
+     */
     @PATCH
     @Path("/books/{bookId}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response updateBook(@PathParam("bookId") int bookId, Book book ){
-        return bl.updateBook(bookId,book);
+    public Response updateBook(@PathParam("bookId") int bookId, Book book) {
+        return bl.updateBook(bookId, book);
     }
-    /**Post to add a new book to the database. Only admin can use this one.*/
+
+    /**
+     * Post to add a new book to the database. Only admin can use this one.
+     */
     @POST
     @Path("/secured/books")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response postBook(Book book){
+    public Response postBook(Book book) {
         return bl.postBook(book);
     }
-    /**Get method to get book titles.*/
+
+    /**
+     * Get method to get book titles.
+     */
     @GET
-    @Path ("/books/title/{bookTitle}")
-    @Produces (MediaType.APPLICATION_JSON)
+    @Path("/books/title/{bookTitle}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Book getBookByTitle(@PathParam("bookTitle") String bookTitle) {
         return bl.getBookByTitle(bookTitle);
     }
-    /**Get the books authors.*/
+
+    /**
+     * Get the books authors.
+     */
     @GET
-    @Path ("/books/author/{bookAuthor}")
-    @Produces (MediaType.APPLICATION_JSON)
+    @Path("/books/author/{bookAuthor}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Book getBookByAuthor(@PathParam("bookAuthor") String bookAuthor) {
         return bl.getBookByAuthor(bookAuthor);
     }
-    /**Gets the books by genre*/
+
+    /**
+     * Gets the books by genre
+     */
     @GET
-    @Path ("/books/genre")
-    @Produces (MediaType.APPLICATION_JSON)
+    @Path("/books/genre")
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Book> getAllGenre() {
         return bl.getAllGenre();
     }
-    /**Gets the books in one genre*/
+
+    /**
+     * Gets the books in one genre
+     */
     @GET
-    @Path ("/books/genre/{genreName}")
-    @Produces (MediaType.APPLICATION_JSON)
+    @Path("/books/genre/{genreName}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Book getBookByGenre(@PathParam("genreName") List<String> genreName) {
         return bl.getBookByGenre(genreName);
     }
 
 
-    /**Review parts starts here
-     *
-     *Post mehtod to add a review to a book*/
+    /**
+     * Review parts starts here
+     * <p>
+     * Post mehtod to add a review to a book
+     */
     @POST
     @Path("/review")
     @Transactional
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postReview(Review review){
+    public Response postReview(Review review) {
         return bl.postReview(review);
     }
-    /**Get all the review*/
+
+    /**
+     * Get all the review
+     */
     @GET
     @Path("/review")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Review> getReview(){
+    public List<Review> getReview() {
         return bl.getReview();
     }
 
 
-    /**Get review by bookTitle*/
+    /**
+     * Get review by bookTitle
+     */
     @GET
     @Path("/review/{bookTitle}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -308,7 +372,9 @@ public class BookifyApi extends Application {
     }
 
 
-    /**Delete review by id*/
+    /**
+     * Delete review by id
+     */
     @DELETE
     @Path("/review/{reviewId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -318,19 +384,16 @@ public class BookifyApi extends Application {
         return bl.removeReview(reviewId);
     }
 
-    /**Update review by id*/
+    /**
+     * Update review by id
+     */
     @PUT
     @Path("/review/{reviewId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response updateReview(@PathParam("reviewId") int reviewId, String newReview){
+    public Response updateReview(@PathParam("reviewId") int reviewId, String newReview) {
         return bl.updateReview(reviewId, newReview);
-        }
-<<<<<<< Updated upstream
-=======
-
-
-
->>>>>>> Stashed changes
     }
+
+}

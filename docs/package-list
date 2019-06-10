@@ -1,0 +1,4 @@
+com.bookify.jpa.api
+com.bookify.jpa.businesslogic
+com.bookify.jpa.models
+com.bookify.jpa.repositrories
