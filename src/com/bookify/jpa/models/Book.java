@@ -17,6 +17,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.*;
 
+/**
+ * Model for a book object.
+ * Have data for a book, genre and users that have read the book.
+ */
 
 @Entity
 @Table(name = "book")
@@ -134,5 +138,20 @@ public class Book implements Serializable {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return getBookId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o.getClass() != this.getClass()) {
+            return false;
+        }
+        Book b = (Book)o;
+
+        return this.getBookId() == b.getBookId();
     }
 }

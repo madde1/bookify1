@@ -65,6 +65,13 @@ public class BookifyApi extends Application {
 
     /**Gets all the friends from one user.*/
     @GET
+    @Path("/users/{id}/recommendation")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserRecommendation(@PathParam("id") int id) {
+        return bl.getUserRecommendation(id);
+    }
+
+    @GET
     @Path("/users/{id}/friends")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFriendsByUserId(@PathParam("id") int id) {
@@ -320,4 +327,10 @@ public class BookifyApi extends Application {
     public Response updateReview(@PathParam("reviewId") int reviewId, String newReview){
         return bl.updateReview(reviewId, newReview);
         }
+<<<<<<< Updated upstream
+=======
+
+
+
+>>>>>>> Stashed changes
     }

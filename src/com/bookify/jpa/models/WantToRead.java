@@ -11,6 +11,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Books that users want to read.
+ */
+
 @Entity
 @Table(name = "wanttoread")
 @JsonPropertyOrder({"id", "bookId", "userId"})

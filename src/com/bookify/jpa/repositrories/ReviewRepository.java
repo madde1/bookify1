@@ -15,6 +15,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Repository for review table.
+ * @see Review
+ */
+
 public class ReviewRepository {
 
     @PersistenceContext(unitName = "BookifyPU")
@@ -25,7 +30,6 @@ public class ReviewRepository {
         return query.getResultList();
     }
     public Review create(Review review){
-        //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         review.setReviewDate(date);
         em.persist(review);

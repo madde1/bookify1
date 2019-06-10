@@ -13,7 +13,11 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-//hej
+/**
+ * Repository for book table and genre table.
+ * @see Book
+ */
+
 public class bookRepository {
 
     @PersistenceContext(unitName = "BookifyPU")

@@ -13,6 +13,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * For users that are using the API.
+ */
+
     @Entity
     @Table(name = "apiusers")
     @JsonPropertyOrder({"apiUsersId","apiUsersName","apiUsersPassword","apiUsersSalt"})

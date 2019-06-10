@@ -13,6 +13,11 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Repository for users.
+ * @see User
+ */
+
 public class UserRepository {
 
     @PersistenceContext(unitName = "BookifyPU")

@@ -11,6 +11,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Model for books that users have read, also saves if its a favourite book.
+ * @see Book
+ */
+
 @Entity
 @IdClass(HaveReadId.class)
 @Table(name = "haveread")

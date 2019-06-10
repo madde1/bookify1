@@ -16,6 +16,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * A user model. Also saves books that the user have read and wants to read. And friends of the user.
+ */
+
 @Entity
 @Table(name = "users")
 @JsonPropertyOrder({"userId","userName","userEmail","userPassword"})

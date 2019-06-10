@@ -9,6 +9,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
+/**
+ * Can generate salt and hash for passwords.
+ */
 
 public class Authorization {
 

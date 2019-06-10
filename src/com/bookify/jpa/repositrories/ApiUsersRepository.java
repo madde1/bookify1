@@ -10,6 +10,10 @@ import javax.persistence.TypedQuery;
 
 import com.bookify.jpa.models.ApiUsers;
 
+/**
+ * Repository for Api user table.
+ */
+
 public class ApiUsersRepository {
     @PersistenceContext(unitName = "BookifyPU")
     private EntityManager em;

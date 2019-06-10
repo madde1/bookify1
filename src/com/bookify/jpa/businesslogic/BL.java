@@ -6,19 +6,14 @@
 package com.bookify.jpa.businesslogic;
 
 
-import com.bookify.jpa.models.Book;
-import com.bookify.jpa.models.HaveRead;
-import com.bookify.jpa.models.Review;
-import com.bookify.jpa.models.User;
+import com.bookify.jpa.models.*;
 import com.bookify.jpa.repositrories.ReviewRepository;
 import com.bookify.jpa.repositrories.UserRepository;
 import com.bookify.jpa.repositrories.bookRepository;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class BL {
@@ -57,6 +52,56 @@ public class BL {
     public Response getHaveReadByUserId(int id) {
         User u = ur.findById(id);
         return Response.ok(u.getBooksHaveRead()).build();
+    }
+
+    /**
+     * Gives points to a book based on if its for example the same genre or author as a book the user have read before.
+     * @param id user id
+     * @return Recommended books
+     */
+    public Response getUserRecommendation(int id) {
+        User u = ur.findById(id);
+        Set<Genre> allGenresRead = new HashSet<>();
+        for(Book b : u.getBooksHaveRead()) {
+            allGenresRead.addAll(b.getBooksGenre());
+        }
+        Set<String> allAuthorsRead = new HashSet<>();
+        for(Book b : u.getBooksHaveRead()) {
+            allAuthorsRead.add(b.getBookAuthor());
+        }
+
+        Map<Book, Integer> recommendations = new HashMap<>();
+        for(Book b : getBookTitel()) {
+            //1 point for same genre
+            for (Genre g : b.getBooksGenre()) {
+                if(allGenresRead.contains(g)) {
+                    recommendations.put(b, 1);
+                }
+            }
+            //3 points for same author
+            if(allAuthorsRead.contains(b.getBookAuthor())) {
+                recommendations.put(b, getNewRecommendationValue(recommendations, b, 3));
+            }
+        }
+
+        //Remove books already read
+        Iterator it = recommendations.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            for(Book b : u.getBooksHaveRead()) {
+                if(pair.getKey().equals(b)) {
+                    it.remove();
+                }
+            }
+        }
+
+       //return Response.ok(recommendations.keySet()).build();
+        return Response.ok(recommendations).build();
+    }
+
+    private int getNewRecommendationValue(Map<Book, Integer> recommendations, Book b, int addAmount) {
+        int value = recommendations.get(b);
+        return value + addAmount;
     }
 
     public Response getFavouritesByUserId(int userId) {

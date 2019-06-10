@@ -19,6 +19,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * Adds a authorization for the api.
+ */
+
 @Provider
 public class SecurityFilter implements ContainerRequestFilter {
 

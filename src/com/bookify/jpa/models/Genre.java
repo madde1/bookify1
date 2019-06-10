@@ -11,7 +11,13 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+
+/**
+ * Model for genre.
+ * @see Book
+ */
 
 @Entity
 @Table(name = "genre")
@@ -52,4 +58,19 @@ public class Genre implements Serializable {
    /* public Set<Book> getBookSet() {
         return bookSet;
     }*/
+
+   @Override
+   public boolean equals(Object o) {
+       if(o.getClass() != this.getClass()) {
+           return false;
+       }
+       Genre g = (Genre)o;
+
+       return this.getName().equals(g.getName());
+   }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
 }

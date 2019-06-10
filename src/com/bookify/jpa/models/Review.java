@@ -12,6 +12,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+/**
+ * A review of a book. Saves what book the review was written for.
+ */
+
 @Entity
 @Table(name = "review")
 @JsonPropertyOrder({"reviewId","reviewUserId","reviewbookId","reviewText","reviewDate"})
